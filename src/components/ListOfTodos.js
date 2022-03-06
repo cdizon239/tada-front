@@ -37,8 +37,19 @@ const styles = {
   }
 };
 
-export const ListOfTodos = ({ listOfTodos, setShowEditTodo, setTodo }) => {
+export const ListOfTodos = ({ listOfTodos, setShowEditTodo, setTodo, getTodos}) => {
   const theme = useContext(ThemeContext);
+
+  const deleteItem = async (todo) => {
+    let itemDelete = await fetch(process.env.REACT_APP_BACKEND_URL+'/todo/'+todo._id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    }
+    )
+      
+  }
 
   const handleEditClick = (e,todo) => {
     e.preventDefault()
@@ -46,6 +57,12 @@ export const ListOfTodos = ({ listOfTodos, setShowEditTodo, setTodo }) => {
     setTodo(todo)
     setShowEditTodo(true)
 
+  }
+
+  const handleDeleteClick = (e, todo) => {
+    e.preventDefault()
+    deleteItem(todo)
+    getTodos()
   }
 
   return (
@@ -70,7 +87,7 @@ export const ListOfTodos = ({ listOfTodos, setShowEditTodo, setTodo }) => {
             </div>
             <div style={{...styles.iconGroup}}>
               <PencilFill size={20} onClick={(e) => handleEditClick(e,todo)}/>
-              <TrashFill size={20}  />
+              <TrashFill size={20}  onClick={(e) => handleDeleteClick(e, todo)}/>
             </div>
           </Card>
         );

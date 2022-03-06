@@ -45,7 +45,7 @@ export const TodosLanding = () => {
         New Todo
         </Button>
         </div>
-			{todos && <ListOfTodos listOfTodos={todos} setShowEditTodo={setShowEditTodo} setTodo={setTodo}/>}
+			{todos && <ListOfTodos listOfTodos={todos} setShowEditTodo={setShowEditTodo} setTodo={setTodo} getTodos={getTodos}/>}
       {categories && <NewTodo categories={categories} showAddTodo={showAddTodo} setShowAddTodo={setShowAddTodo} getTodos={getTodos}/>}
       {todo && <ShowTodo todo={todo} setTodo={setTodo} showEditTodo={showEditTodo} setShowEditTodo={setShowEditTodo} categories={categories} getTodos={getTodos}/>}
 		</>
