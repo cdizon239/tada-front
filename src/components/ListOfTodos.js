@@ -37,8 +37,17 @@ const styles = {
   }
 };
 
-export const ListOfTodos = ({ listOfTodos }) => {
+export const ListOfTodos = ({ listOfTodos, setShowEditTodo, setTodo }) => {
   const theme = useContext(ThemeContext);
+
+  const handleEditClick = (e,todo) => {
+    e.preventDefault()
+    console.log(todo);
+    setTodo(todo)
+    setShowEditTodo(true)
+
+  }
+
   return (
     <div style={{ ...styles.cardStyles }}>
       {listOfTodos.map((todo) => {
@@ -60,7 +69,7 @@ export const ListOfTodos = ({ listOfTodos }) => {
               )}
             </div>
             <div style={{...styles.iconGroup}}>
-              <PencilFill size={20} />
+              <PencilFill size={20} onClick={(e) => handleEditClick(e,todo)}/>
               <TrashFill size={20}  />
             </div>
           </Card>

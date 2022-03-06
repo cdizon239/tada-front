@@ -6,7 +6,7 @@ export const light = {
         mandarin: "#F79256",
         blackCoral: "4f5d75",
         silver: "#bfc0c0",
-        spaceCadet: "2D3142",
+        spaceCadet: "#2D3142",
         terracota: '#e07a5f',
         eggshellWhite: '#F4F1DE',
         deepChampagne: '#F2CC8F',

@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { Modal, FloatingLabel, Form } from "react-bootstrap";
+import { ThemeContext } from "styled-components";
 
 
 const styles = {
@@ -13,6 +14,7 @@ const styles = {
 };
 
 export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos }) => {
+  const theme = useContext(ThemeContext)
   const [todoName, setTodoName] = useState()
   const [todoDescription, setTodoDescription] = useState()
   const [todoDueDate, setTodoDueDate] = useState()
@@ -43,13 +45,13 @@ export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos }) =
   return (
     <>
       <Modal show={showAddTodo} fullscreen={true}>
-        <div className="modal-header" style={{ ...styles.modalHeader }}>
+        <div className="modal-header" style={{ ...styles.modalHeader, background: theme.palettes.spaceCadet, color: theme.palettes.eggshellWhite}}>
           <p onClick={() => setShowAddTodo(false)}>Cancel</p>
           <h4> Add a new thing</h4>
           <p onClick={(e) => createTodoItem(e)}> Done </p>
         </div>
-        <div className="modal-content">
-          <div className="form-group" style={{ ...styles.formGroup }}>
+        <div className="modal-content" style={{ background: theme.background }}>
+          <div className="form-group" style={{ ...styles.formGroup}}>
             <FloatingLabel
               controlId="floatingTextarea"
               label="What would you like to do?"

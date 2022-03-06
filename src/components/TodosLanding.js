@@ -5,6 +5,7 @@ import { ListOfTodos } from "./ListOfTodos";
 import {Button} from 'react-bootstrap'
 import { PlusCircleFill } from "react-bootstrap-icons";
 import { NewTodo } from "./NewTodo";
+import { ShowTodo } from "./ShowTodo";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 
 
@@ -13,6 +14,8 @@ export const TodosLanding = () => {
 	const [todos, setTodos] = useState()
   const [categories, setCategories] = useState()
   const [showAddTodo, setShowAddTodo] = useState()
+  const [showEditTodo, setShowEditTodo] = useState(false)
+  const [todo, setTodo] = useState()
   
 
   const getTodos = async () => {
@@ -42,8 +45,9 @@ export const TodosLanding = () => {
         New Todo
         </Button>
         </div>
-			{todos && <ListOfTodos listOfTodos={todos} />}
+			{todos && <ListOfTodos listOfTodos={todos} setShowEditTodo={setShowEditTodo} setTodo={setTodo}/>}
       {categories && <NewTodo categories={categories} showAddTodo={showAddTodo} setShowAddTodo={setShowAddTodo} getTodos={getTodos}/>}
+      {todo && <ShowTodo todo={todo} setTodo={setTodo} showEditTodo={showEditTodo} setShowEditTodo={setShowEditTodo} categories={categories} getTodos={getTodos}/>}
 		</>
 	)
 };
