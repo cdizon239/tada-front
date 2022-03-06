@@ -4,12 +4,12 @@ import { ThemeContext } from "styled-components";
 import { ListOfTodos } from "./ListOfTodos";
 import {Button} from 'react-bootstrap'
 import { PlusCircleFill } from "react-bootstrap-icons";
-import { ModalUp } from "./ModalUp";
+import { NewTodo } from "./NewTodo";
 
 export const TodosLanding = () => {
 	const theme = useContext(ThemeContext)
 	const [todos, setTodos] = useState()
-  const [showModal, setShowModal] = useState()
+  const [showAddTodo, setShowAddTodo] = useState()
   
 
   const getTodos = async () => {
@@ -28,14 +28,13 @@ export const TodosLanding = () => {
 		<>
 			<Header title={"Todos"} />
       <div>
-        <Button style={{background:theme.palettes.tealBlue, border: 'none'}}>
+        <Button style={{background:theme.palettes.tealBlue, border: 'none'}} onClick={() => setShowAddTodo(true)}>
           <PlusCircleFill className='icon'/>
         New Todo
         </Button>
         </div>
 			{todos && <ListOfTodos listOfTodos={todos} />}
-      <ModalUp showModal={showModal} setShowModal={setShowModal}/>
-
+      <NewTodo showAddTodo={showAddTodo} setShowAddTodo={setShowAddTodo}/>
 		</>
 	)
 };
