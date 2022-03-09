@@ -26,6 +26,17 @@ const GlobalStyles = createGlobalStyle`
     font-size: 30px;
   }
 
+  .form-check-input[type=checkbox] {
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    border: none;
+  }
+
+  .form-check-input:checked {
+    background-color: ${({theme}) => theme.palettes.grass}
+  }
+  
 `;
 
 export default GlobalStyles;

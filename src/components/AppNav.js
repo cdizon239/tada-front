@@ -11,16 +11,16 @@ export const AppNav = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{ borderColor: 'none'}} />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
-              <Nav.Link href="#">Todo</Nav.Link>
-              <Nav.Link href="#">Types to do</Nav.Link>
-              <Nav.Link href="#">Tada</Nav.Link>
+              <Nav.Link href="/todos">Todo</Nav.Link>
+              <Nav.Link href="/lists">Types to do</Nav.Link>
+              <Nav.Link href="/tadas">Tada</Nav.Link>
               <NavDropdown title={"Profile"} id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.2">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Logout</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-          <Navbar.Brand href="#home" id='logoTitle'>ta-dah</Navbar.Brand>
+          <Navbar.Brand href="/todos" id='logoTitle'>ta-dah</Navbar.Brand>
         </Container>
       </Navbar>
     </>

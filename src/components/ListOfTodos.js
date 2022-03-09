@@ -35,26 +35,24 @@ const styles = {
   text: {
     margin: 0
   },
-  checkbox: {
-    borderRadius: '50%'
+  checkboxDiv: {
+    padding: '5px'
   }
 };
 
-export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTodos}) => {
+export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTodos }) => {
   const theme = useContext(ThemeContext);
 
   const deleteItem = async (todo) => {
-    let itemDelete = await fetch(process.env.REACT_APP_BACKEND_URL+'/todo/'+todo._id, {
+    let itemDelete = await fetch(process.env.REACT_APP_BACKEND_URL + '/todo/' + todo._id, {
       method: 'DELETE',
       headers: {
-        'Content-Type' : 'application/json'
+        'Content-Type': 'application/json'
       }
-    }
-    )
-      
+    })
   }
 
-  const handleEditClick = (e,todo) => {
+  const handleEditClick = (e, todo) => {
     e.preventDefault()
     setTodo(todo)
     console.log(todo);
@@ -82,19 +80,19 @@ export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTo
             }}
           >
             <div>
-            <Form.Check aria-label="checkbox-option" style={{...styles.checkbox}}/>
+              <Form.Check aria-label="checkbox-option" style={{ ...styles.checkboxDiv }} />
             </div>
             <div style={{ ...styles.todoItemsContent }}>
               <h5 className="todo-title">{todo.name}</h5>
               {todo.due_date ? (
-                <p className="date" style={{...styles.text}}> due on {todo.due_date?.split("T")[0]}</p>
+                <p className="date" style={{ ...styles.text }}> due on {todo.due_date?.split("T")[0]}</p>
               ) : (
                 "No due date"
               )}
             </div>
-            <div style={{...styles.iconGroup}}>
-              <PencilFill size={20} onClick={(e) => handleEditClick(e,todo)}/>
-              <TrashFill size={20}  onClick={(e) => handleDeleteClick(e, todo)}/>
+            <div style={{ ...styles.iconGroup }}>
+              <PencilFill size={20} onClick={(e) => handleEditClick(e, todo)} />
+              <TrashFill size={20} onClick={(e) => handleDeleteClick(e, todo)} />
             </div>
           </Card>
         );
