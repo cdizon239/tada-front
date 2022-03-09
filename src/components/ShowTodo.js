@@ -12,7 +12,6 @@ const styles = {
     },
 };
 
-
 export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categories, getTodos }) => {
     const theme = useContext(ThemeContext)
     const [todoName, setTodoName] = useState(todo.name || '')
@@ -37,6 +36,7 @@ export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categor
         let editedItem = await editItem.json()
         console.log(editedItem);
         getTodos()
+        setTodo(null)
         setShowEditTodo(false)
     }
 
@@ -45,7 +45,9 @@ export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categor
             <Modal show={showEditTodo} fullscreen={true}>
                 <div className="modal-header" style={{ ...styles.modalHeader, background: theme.palettes.spaceCadet, color: theme.palettes.eggshellWhite }}>
                     <p onClick={() => {
+                        setTodo(null)
                         setShowEditTodo(false)
+
                     }}>Cancel</p>
                     <h4> Edit Todo Item</h4>
                     <p onClick={(e) => editTodoItem(e)}> Done </p>

@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { Card, ListGroup } from "react-bootstrap";
+import React, { useContext, useEffect } from "react";
+import { Card, ListGroup, Form } from "react-bootstrap";
 import "./ListOfTodos.css";
 import { ThemeContext } from "styled-components";
-import { PencilFill, TrashFill } from "react-bootstrap-icons";
+import { PencilFill, TrashFill, Circle } from "react-bootstrap-icons";
 
 const styles = {
   cardStyles: {
@@ -33,11 +33,14 @@ const styles = {
     justifyContent: 'space-around'
   },
   text: {
-      margin: 0
+    margin: 0
+  },
+  checkbox: {
+    borderRadius: '50%'
   }
 };
 
-export const ListOfTodos = ({ listOfTodos, setShowEditTodo, setTodo, getTodos}) => {
+export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTodos}) => {
   const theme = useContext(ThemeContext);
 
   const deleteItem = async (todo) => {
@@ -53,9 +56,10 @@ export const ListOfTodos = ({ listOfTodos, setShowEditTodo, setTodo, getTodos}) 
 
   const handleEditClick = (e,todo) => {
     e.preventDefault()
-    console.log(todo);
     setTodo(todo)
+    console.log(todo);
     setShowEditTodo(true)
+    getTodos()
 
   }
 
@@ -77,6 +81,9 @@ export const ListOfTodos = ({ listOfTodos, setShowEditTodo, setTodo, getTodos}) 
               backgroundColor: theme.palettes.mandarin,
             }}
           >
+            <div>
+            <Form.Check aria-label="checkbox-option" style={{...styles.checkbox}}/>
+            </div>
             <div style={{ ...styles.todoItemsContent }}>
               <h5 className="todo-title">{todo.name}</h5>
               {todo.due_date ? (
