@@ -47,7 +47,7 @@ export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos }) =
           name: todoName,
           description: todoDescription,
           due_date: todoDueDate,
-          category_name: todoCategory,
+          category_name: todoCategory && todoCategory !== [''] ? todoCategory: 'Uncategorized',
           task_done: false
         })
       })

@@ -12,29 +12,44 @@ const styles = {
     },
 };
 
-export const NewCategory = ({ setAddCategory, addCategory , getCategories}) => {
+export const NewCategory = ({ setAddCategory, addCategory, getCategories }) => {
     const [categoryName, setCategoryName] = useState()
     const [categoryColor, setCategoryColor] = useState()
+    const [errors, setErrors] = useState({})
     const theme = useContext(ThemeContext)
 
-    const createCategory = async () => {
-        let createItem = await fetch(process.env.REACT_APP_BACKEND_URL + '/category', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                category_name: categoryName,
-                color: categoryColor
-            })
-        })
-        let createdItem = await createItem.json()
-        if (createdItem) {
-            console.log(createdItem);
-            setAddCategory(false)
-            getCategories()
-        }
+    let formErrorCheck = () => {
+        const newErrors = {}
+        if (!categoryName || categoryName === '') newErrors.categoryName = 'Category name cannot be blank!'
+        return newErrors
+    }
 
+    const createCategory = async (e) => {
+        e.preventDefault()
+
+        let newCategoryErrors = formErrorCheck()
+
+        if (Object.keys(newCategoryErrors).length > 0) {
+            setErrors(newCategoryErrors)
+        } else {
+            let createItem = await fetch(process.env.REACT_APP_BACKEND_URL + '/category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    category_name: categoryName,
+                    color: categoryColor
+                })
+            })
+            let createdItem = await createItem.json()
+            if (createdItem) {
+                console.log(createdItem);
+                setAddCategory(false)
+                getCategories()
+            }
+
+        }
     }
     return (
         <>
@@ -56,8 +71,13 @@ export const NewCategory = ({ setAddCategory, addCategory , getCategories}) => {
                                 placeholder="What's the name of you new list?"
                                 onChange={(e) => {
                                     console.log(e.target.value);
-                                    setCategoryName(e.target.value)}}
+                                    setCategoryName(e.target.value)
+                                }}
+                                isInvalid={!!errors.categoryName}
                             />
+                            <Form.Control.Feedback type='invalid'>
+                                {errors.categoryName}
+                            </Form.Control.Feedback>
                         </FloatingLabel>
                         <Form.Label htmlFor="exampleColorInput">Color picker</Form.Label>
                         <Form.Control
@@ -67,7 +87,8 @@ export const NewCategory = ({ setAddCategory, addCategory , getCategories}) => {
                             title="Choose your color"
                             onChange={(e) => {
                                 console.log(e.target.value);
-                                setCategoryColor(e.target.value)}}
+                                setCategoryColor(e.target.value)
+                            }}
                         />
                     </div>
                 </div>

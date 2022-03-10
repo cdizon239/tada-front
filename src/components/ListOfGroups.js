@@ -72,21 +72,23 @@ export const ListOfGroups = ({ todos, categories }) => {
                 let completedTodosInCategory = todos.filter(todo => todo.category?.category_name === category.category_name && todo.task_done === true).length
                 let progress = (completedTodosInCategory / todosInCategory) * 100
                 return (
-                    <NavLink className='nav-link' to={`/tadas/${category._id}`} key={`${category._id}`}>
-                        <Card
-                            key={category._id}
-                            className="category_item"
-                            style={{
-                                ...styles.categoryCard,
-                                backgroundColor: theme.palettes.deepChampagne,
-                            }}
-                        >
-                            <div style={{ ...styles.categoryContent }}>
-                                <h5 className="category-title">{category.category_name} <span style={{ fontSize: "12px" }}>{completedTodosInCategory} of {todosInCategory} tasks completed</span></h5>
-                                <ProgressBar now={progress} />
-                            </div>
-                        </Card>
-                    </NavLink>
+                    <>
+                        <NavLink className='nav-link' to={`/tadas/${category._id}`} key={`${category._id}`}>
+                            <Card
+                                key={category._id}
+                                className="category_item"
+                                style={{
+                                    ...styles.categoryCard,
+                                    backgroundColor: theme.palettes.deepChampagne,
+                                }}
+                            >
+                                <div style={{ ...styles.categoryContent }}>
+                                    <h5 className="category-title">{category.category_name} <span style={{ fontSize: "12px" }}>{completedTodosInCategory} of {todosInCategory} tasks completed</span></h5>
+                                    <ProgressBar now={progress} />
+                                </div>
+                            </Card>
+                        </NavLink>
+                    </>
                 );
             })}
         </div>
