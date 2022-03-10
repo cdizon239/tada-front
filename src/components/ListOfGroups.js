@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Card, ListGroup, Form, ProgressBar } from "react-bootstrap";
 import { ThemeContext } from "styled-components";
 import './ListOfGroups.css'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 // import { PencilFill, TrashFill, Circle } from "react-bootstrap-icons";
 
@@ -72,7 +72,7 @@ export const ListOfGroups = ({ todos, categories }) => {
                 let completedTodosInCategory = todos.filter(todo => todo.category?.category_name === category.category_name && todo.task_done === true).length
                 let progress = (completedTodosInCategory / todosInCategory) * 100
                 return (
-                    <Link to={`/tadas/${category._id}`} key={`${category._id}`}>
+                    <NavLink className='nav-link' to={`/tadas/${category._id}`} key={`${category._id}`}>
                         <Card
                             key={category._id}
                             className="category_item"
@@ -86,7 +86,7 @@ export const ListOfGroups = ({ todos, categories }) => {
                                 <ProgressBar now={progress} />
                             </div>
                         </Card>
-                    </Link>
+                    </NavLink>
                 );
             })}
         </div>

@@ -1,3 +1,7 @@
 .progress-bar {
     background-color: #629460 !important;
 }
+.card-nav-link {
+    color: black;
+    text-decoration: none;
+}

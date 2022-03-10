@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Header from './Header';
 import { ListOfGroups } from './ListOfGroups';
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { CategoryDetail } from './CategoryDetail';
+import { Button } from 'react-bootstrap'
+import { PlusCircleFill } from "react-bootstrap-icons";
+import { ThemeContext } from 'styled-components';
+import { NewCategory } from './NewCategory';
+
 
 export const TadasLanding = () => {
     const [categories, setCategories] = useState()
     const [todos, setTodos] = useState()
-    const [category, setCategory] = useState()
+    const [addCategory, setAddCategory] = useState(0)
+    const theme = useContext(ThemeContext)
 
     //  fetch all categories
     const getCategories = async () => {
@@ -37,8 +43,14 @@ export const TadasLanding = () => {
                 <Route path="/tadas/:categoryId" element={<CategoryDetail />}></Route>
             </Routes>
             <Header title={"Tadas"} />
+            <Button style={{ background: theme.palettes.tealBlue, border: 'none' }}  onClick={() => setAddCategory(true)}>
+                <PlusCircleFill className='icon' />
+                New List
+            </Button>
             {todos && categories && <ListOfGroups todos={todos} categories={categories} />}
-            
+            <NewCategory setAddCategory={setAddCategory} addCategory={addCategory} getCategories={getCategories}/>
         </>
+
+
     )
 }

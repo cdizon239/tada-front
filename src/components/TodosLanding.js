@@ -30,8 +30,7 @@ export const TodosLanding = () => {
     let allTodos = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo");
     let jsonAllTodos = await allTodos.json();
     if (jsonAllTodos) {
-
-      selectedCategories ? setTodos(jsonAllTodos.filter(todo => selectedCategories.includes(todo.category?.category_name))) : setTodos(jsonAllTodos)
+      selectedCategories ? setTodos(jsonAllTodos.filter(todo => selectedCategories.includes(todo.category?.category_name) && !todo.task_done)) : setTodos(jsonAllTodos.filter(todo => !todo.task_done))
 
 		}
   };
@@ -44,6 +43,10 @@ export const TodosLanding = () => {
   useEffect(() => {
     getTodos()
   }, [selectedCategories])
+
+  useEffect(() => {
+    console.log(todos);
+  }, [todos])
 
 
   return (

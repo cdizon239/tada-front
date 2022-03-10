@@ -12,7 +12,6 @@ export const AppNav = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
               <Nav.Link href="/todos">Todo</Nav.Link>
-              <Nav.Link href="/lists">Types to do</Nav.Link>
               <Nav.Link href="/tadas">Tada</Nav.Link>
               <NavDropdown title={"Profile"} id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.2">Profile</NavDropdown.Item>

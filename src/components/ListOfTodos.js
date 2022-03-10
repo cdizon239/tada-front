@@ -51,6 +51,21 @@ export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTo
     })
   }
 
+  const itemDone = async (todo) => {
+    let doneItem = await fetch(process.env.REACT_APP_BACKEND_URL+'/todo/'+todo._id, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          task_done: todo.task_done ? !todo.task_done : true
+        }
+      )
+    })
+    getTodos()
+  }
+
   const handleEditClick = (e, todo) => {
     e.preventDefault()
     setTodo(todo)
@@ -66,6 +81,10 @@ export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTo
     getTodos()
   }
 
+  const handleDone = (e, todo) => {
+    itemDone(todo)
+  }
+
   return (
     <div style={{ ...styles.cardStyles }}>
       {listOfTodos.map((todo) => {
@@ -79,7 +98,7 @@ export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTo
             }}
           >
             <div>
-              <Form.Check aria-label="checkbox-option" style={{ ...styles.checkboxDiv }} />
+              <Form.Check aria-label="checkbox-option" style={{ ...styles.checkboxDiv }} defaultChecked={todo.task_done} onClick={(e) => handleDone(e, todo)} />
             </div>
             <div style={{ ...styles.todoItemsContent }}>
               <h5 className="todo-title">{todo.name}</h5>
