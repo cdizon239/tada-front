@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { Card, ListGroup, Form } from "react-bootstrap";
-import "./ListOfTodos.css";
 import { ThemeContext } from "styled-components";
 import { PencilFill, TrashFill, Circle } from "react-bootstrap-icons";
 
@@ -76,7 +75,7 @@ export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTo
             className="todo_item"
             style={{
               ...styles.todoItemsCard,
-              backgroundColor: theme.palettes.mandarin,
+              backgroundColor: theme.palettes.deepChampagne,
             }}
           >
             <div>

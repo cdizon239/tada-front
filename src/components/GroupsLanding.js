@@ -1,7 +1,10 @@
 import React from 'react'
 
 export const GroupsLanding = () => {
-  return (
-    <div>GroupsLanding</div>
-  )
+    //  fetch all categories
+    //  fetch all todos
+
+    return (
+        <div>GroupsLanding</div>
+    )
 }

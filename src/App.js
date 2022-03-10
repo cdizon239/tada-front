@@ -9,6 +9,7 @@ import { TodosLanding } from "./components/TodosLanding";
 import { GroupsLanding } from "./components/GroupsLanding";
 import { TadasLanding } from "./components/TadasLanding";
 import { light, dark } from './themes/theme';
+import { CategoryDetail } from "./components/CategoryDetail";
 
 
 const AppContext = createContext();
@@ -24,7 +25,8 @@ function App() {
             <Route path="/" element={<TodosLanding />}></Route>
             <Route path="/todos" element={<TodosLanding />}></Route>
             <Route path="/lists" element={<GroupsLanding />}></Route>
-            <Route path="/tadas" element={<TadasLanding />}></Route>
+            <Route path="/tadas/*" element={<TadasLanding />}></Route>
+            <Route path="/tadas/:categoryId" element={<CategoryDetail />}></Route>
           </Routes>
         </AppLayout>
       </ThemeProvider>
