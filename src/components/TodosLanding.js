@@ -30,7 +30,8 @@ export const TodosLanding = () => {
     let allTodos = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo");
     let jsonAllTodos = await allTodos.json();
     if (jsonAllTodos) {
-      selectedCategories ? setTodos(jsonAllTodos.filter(todo => selectedCategories.includes(todo.category?.category_name) && !todo.task_done)) : setTodos(jsonAllTodos.filter(todo => !todo.task_done))
+      let sortedTodos = jsonAllTodos.sort((a,b) => new Date(a.due_date) - new Date(b.due_date))
+      selectedCategories ? setTodos(sortedTodos.filter(todo => selectedCategories.includes(todo.category?.category_name) && !todo.task_done)) : setTodos(sortedTodos.filter(todo => !todo.task_done))
 
 		}
   };
