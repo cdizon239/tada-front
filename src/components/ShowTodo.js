@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { Modal, FloatingLabel, Form } from "react-bootstrap";
+import { Modal, FloatingLabel, Form, Button } from "react-bootstrap";
 import { ThemeContext } from "styled-components";
+import { PlusCircleFill } from "react-bootstrap-icons";
+import { NewCategory } from "./NewCategory";
 
 const styles = {
     modalHeader: {
@@ -12,16 +14,17 @@ const styles = {
     },
 };
 
-export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categories, getTodos }) => {
+export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categories, getTodos, getCategories }) => {
     const theme = useContext(ThemeContext)
     const [todoName, setTodoName] = useState(todo.name || '')
     const [todoDescription, setTodoDescription] = useState(todo.description || '')
     const [todoDueDate, setTodoDueDate] = useState(todo.due_date?.split('T')[0] || '')
     const [todoCategory, setTodoCategory] = useState(todo.category.category_name || '')
+    const [addCategory, setAddCategory] = useState()
 
     const editTodoItem = async (e) => {
         e.preventDefault()
-        let editItem = await fetch(process.env.REACT_APP_BACKEND_URL+'/todo/'+todo._id, {
+        let editItem = await fetch(process.env.REACT_APP_BACKEND_URL + '/todo/' + todo._id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -31,7 +34,7 @@ export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categor
                 description: todoDescription,
                 due_date: todoDueDate,
                 category_name: todoCategory
-              })
+            })
         })
         let editedItem = await editItem.json()
         console.log(editedItem);
@@ -98,6 +101,11 @@ export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categor
                                 })}
                             </Form.Select>
                         </FloatingLabel>
+                        <Button style={{ background: theme.palettes.tealBlue, border: 'none' }} onClick={() => setAddCategory(true)}>
+                            <PlusCircleFill className='icon' />
+                            Add a category
+                        </Button>
+                        <NewCategory setAddCategory={setAddCategory} addCategory={addCategory} runToRender={getCategories} />
                     </div>
                 </div>
             </Modal>

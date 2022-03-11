@@ -43,12 +43,12 @@ export const TadasLanding = () => {
                 <Route path="/tadas/:categoryId" element={<CategoryDetail />}></Route>
             </Routes>
             <Header title={"Tadas"} />
-            <Button style={{ background: theme.palettes.tealBlue, border: 'none' }}  onClick={() => setAddCategory(true)}>
+            <Button style={{ background: theme.palettes.tealBlue, border: 'none', margin:'0 0 0 auto'}}  onClick={() => setAddCategory(true)}>
                 <PlusCircleFill className='icon' />
-                New List
+                New Category
             </Button>
             {todos && categories && <ListOfGroups todos={todos} categories={categories} />}
-            <NewCategory setAddCategory={setAddCategory} addCategory={addCategory} getCategories={getCategories}/>
+            <NewCategory setAddCategory={setAddCategory} addCategory={addCategory} runToRender={getCategories}/>
         </>
 
 

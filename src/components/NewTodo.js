@@ -1,6 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Modal, FloatingLabel, Form } from "react-bootstrap";
+import { Modal, FloatingLabel, Form, Button } from "react-bootstrap";
 import { ThemeContext } from "styled-components";
+import { PlusCircleFill } from "react-bootstrap-icons";
+import { NewCategory } from "./NewCategory";
+
 
 
 const styles = {
@@ -13,13 +16,14 @@ const styles = {
   },
 };
 
-export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos }) => {
+export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos , getCategories}) => {
   const theme = useContext(ThemeContext)
   const [todoName, setTodoName] = useState()
   const [todoDescription, setTodoDescription] = useState()
   const [todoDueDate, setTodoDueDate] = useState()
   const [todoCategory, setTodoCategory] = useState()
   const [errors, setErrors] = useState({})
+  const [addCategory, setAddCategory] = useState()
 
   let formErrorCheck = () => {
     const newErrors = {}
@@ -118,6 +122,11 @@ export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos }) =
                 {errors.todoCategory}
               </Form.Control.Feedback>
             </FloatingLabel>
+            <Button style={{ background: theme.palettes.tealBlue, border: 'none' }}  onClick={() => setAddCategory(true)}>
+                <PlusCircleFill className='icon' />
+                Add a category
+            </Button>
+            <NewCategory setAddCategory={setAddCategory} addCategory={addCategory} runToRender={getCategories}/>              
           </div>
         </div>
       </Modal>

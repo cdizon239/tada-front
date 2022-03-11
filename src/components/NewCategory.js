@@ -12,7 +12,7 @@ const styles = {
     },
 };
 
-export const NewCategory = ({ setAddCategory, addCategory, getCategories }) => {
+export const NewCategory = ({ setAddCategory, addCategory, runToRender }) => {
     const [categoryName, setCategoryName] = useState()
     const [categoryColor, setCategoryColor] = useState()
     const [errors, setErrors] = useState({})
@@ -46,7 +46,7 @@ export const NewCategory = ({ setAddCategory, addCategory, getCategories }) => {
             if (createdItem) {
                 console.log(createdItem);
                 setAddCategory(false)
-                getCategories()
+                runToRender()
             }
 
         }
