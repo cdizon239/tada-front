@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import {Card, Form} from 'react-bootstrap'
 import { ThemeContext } from 'styled-components';
 import Header from './Header';
+import { PencilFill, TrashFill, Circle } from "react-bootstrap-icons";
+import { EditCategory } from './EditCategory';
+import { DeleteConfirmation } from './DeleteConfirmation';
+
 
 const styles = {
     cardStyles: {
@@ -36,9 +40,12 @@ const styles = {
 
 
 export const CategoryDetail = () => {
+    const navigate = useNavigate()
     const theme = useContext(ThemeContext)
     const [todos, setTodos] = useState()
     const [category, setCategory] = useState()
+    const [showEditCategory, setShowEditCategory] = useState()
+    const [showDeleteModal, setShowDeleteModal] = useState()
 
     let params = useParams()
 
@@ -62,6 +69,21 @@ export const CategoryDetail = () => {
         }
     }
 
+    const deleteClickHandler = async (e) => {
+        e.preventDefault()
+        let deleteCategory = await fetch( process.env.REACT_APP_BACKEND_URL + '/category/'+params.categoryId, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        let deletedCategory = await deleteCategory.json()
+        if (deletedCategory) {
+            setShowDeleteModal(false)
+            navigate('/tadas')
+        }
+    }
+
     useEffect(() => {
         getTodos()
         getCategory()
@@ -69,9 +91,13 @@ export const CategoryDetail = () => {
 
     return (
         <>
-            
+        {category && (
+            <>
             <NavLink to='/tadas' style={{...styles.navLink}}><p>{"< Back"}</p></NavLink>
-            { category && <Header title={category.category_name} />}
+            <Header title={category.category_name} />
+            <PencilFill size={20} onClick={(e) => setShowEditCategory(true)} />
+            <TrashFill size={20} onClick={() => setShowDeleteModal(true)}/>
+            <EditCategory category={category} setCategory={setCategory} showEditCategory={showEditCategory} setShowEditCategory={setShowEditCategory} getCategory={getCategory} />
             {todos?.map(todo => {
                 return (
                     <Card
@@ -93,11 +119,13 @@ export const CategoryDetail = () => {
                         "No due date"
                       )}
                     </div>
-                    <div style={{ ...styles.iconGroup }}>
-                    </div>
                   </Card>
                 )
             })}
+            <DeleteConfirmation showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} deleteClickHandler={deleteClickHandler}/>
+            </>
+        )
+        }
         </>
     )
 }
