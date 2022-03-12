@@ -47,6 +47,7 @@ export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos , ge
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           name: todoName,
           description: todoDescription,

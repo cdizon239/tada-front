@@ -19,7 +19,13 @@ export const TodosLanding = () => {
   const [selectedCategories, setSelectedCategories] = useState()
 
   const getCategories = async () => {
-    let allCategories = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo/categories");
+    let allCategories = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo/categories", {
+      method: "GET",
+      headers: { 
+        'Access-Control-Allow-Origin':'*',
+        "Content-Type": "application/json" },
+      credentials: "include"
+    });
     let jsonAllCategories = await allCategories.json();
     if (jsonAllCategories) {
       setCategories(jsonAllCategories.map(category => category.category_name))
@@ -27,7 +33,11 @@ export const TodosLanding = () => {
   }
 
   const getTodos = async () => {
-    let allTodos = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo");
+    let allTodos = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include"
+    });
     let jsonAllTodos = await allTodos.json();
     if (jsonAllTodos) {
       let sortedTodos = jsonAllTodos.sort((a,b) => new Date(a.due_date) - new Date(b.due_date))
