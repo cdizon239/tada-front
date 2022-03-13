@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Modal, FloatingLabel, Form } from "react-bootstrap";
 import { ThemeContext } from "styled-components";
+import { useNavigate } from 'react-router-dom';
 
 const styles = {
     modalHeader: {
@@ -14,6 +15,7 @@ const styles = {
 
 export const EditCategory = ({ category, setCategory, showEditCategory, setShowEditCategory, getCategory }) => {
     const theme = useContext(ThemeContext)
+    const navigate = useNavigate('/')
     const [categoryName, setCategoryName] = useState(category?.category_name || '')
     const [categoryColor, setCategoryColor] = useState(category?.color || '')
     const [errors, setErrors] = useState({})
@@ -41,6 +43,7 @@ export const EditCategory = ({ category, setCategory, showEditCategory, setShowE
                 })
             })
             let editedItem = await editItem.json()
+            if (editedItem.status === 302) navigate('/')
             console.log(editedItem);
             getCategory()
             setCategory(null)

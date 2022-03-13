@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Modal, FloatingLabel, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "styled-components";
 
 const styles = {
@@ -17,6 +18,7 @@ export const NewCategory = ({ setAddCategory, addCategory, runToRender }) => {
     const [categoryColor, setCategoryColor] = useState()
     const [errors, setErrors] = useState({})
     const theme = useContext(ThemeContext)
+    const navigate = useNavigate()
 
     let formErrorCheck = () => {
         const newErrors = {}
@@ -26,7 +28,6 @@ export const NewCategory = ({ setAddCategory, addCategory, runToRender }) => {
 
     const createCategory = async (e) => {
         e.preventDefault()
-
         let newCategoryErrors = formErrorCheck()
 
         if (Object.keys(newCategoryErrors).length > 0) {
@@ -44,6 +45,7 @@ export const NewCategory = ({ setAddCategory, addCategory, runToRender }) => {
                 })
             })
             let createdItem = await createItem.json()
+            if (createdItem.status === 302) navigate('/')
             if (createdItem) {
                 console.log(createdItem);
                 setAddCategory(false)

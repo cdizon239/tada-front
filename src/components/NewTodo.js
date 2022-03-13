@@ -3,6 +3,7 @@ import { Modal, FloatingLabel, Form, Button } from "react-bootstrap";
 import { ThemeContext } from "styled-components";
 import { PlusCircleFill } from "react-bootstrap-icons";
 import { NewCategory } from "./NewCategory";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -24,6 +25,7 @@ export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos , ge
   const [todoCategory, setTodoCategory] = useState()
   const [errors, setErrors] = useState({})
   const [addCategory, setAddCategory] = useState()
+  const navigate = useNavigate()
 
   let formErrorCheck = () => {
     const newErrors = {}
@@ -42,7 +44,7 @@ export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos , ge
       setErrors(newTodoFormErrors)
     } else {
       console.log(todoName, todoDescription, todoDueDate, todoCategory);
-      let createdItem = await fetch(process.env.REACT_APP_BACKEND_URL + '/todo', {
+      let createItem = await fetch(process.env.REACT_APP_BACKEND_URL + '/todo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -56,6 +58,8 @@ export const NewTodo = ({ categories, showAddTodo, setShowAddTodo, getTodos , ge
           task_done: false
         })
       })
+      let createdItem = await createItem.json()
+      if (createdItem.status === 302) navigate('/')
       getTodos()
       setShowAddTodo(false)
 

@@ -3,6 +3,7 @@ import { Modal, FloatingLabel, Form, Button } from "react-bootstrap";
 import { ThemeContext } from "styled-components";
 import { PlusCircleFill } from "react-bootstrap-icons";
 import { NewCategory } from "./NewCategory";
+import { useNavigate } from 'react-router-dom';
 
 const styles = {
     modalHeader: {
@@ -16,6 +17,7 @@ const styles = {
 
 export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categories, getTodos, getCategories }) => {
     const theme = useContext(ThemeContext)
+    const navigate = useNavigate()
     const [todoName, setTodoName] = useState(todo.name || '')
     const [todoDescription, setTodoDescription] = useState(todo.description || '')
     const [todoDueDate, setTodoDueDate] = useState(todo.due_date?.split('T')[0] || '')
@@ -38,7 +40,7 @@ export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categor
             })
         })
         let editedItem = await editItem.json()
-        console.log(editedItem);
+        if (editedItem.status === 302) navigate('/')
         getTodos()
         setTodo(null)
         setShowEditTodo(false)

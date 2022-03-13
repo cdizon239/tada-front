@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Header from './Header';
 import { ListOfGroups } from './ListOfGroups';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { CategoryDetail } from './CategoryDetail';
 import { Button } from 'react-bootstrap'
 import { PlusCircleFill } from "react-bootstrap-icons";
@@ -14,6 +14,7 @@ export const TadasLanding = () => {
     const [todos, setTodos] = useState()
     const [addCategory, setAddCategory] = useState(0)
     const theme = useContext(ThemeContext)
+    const navigate = useNavigate()
 
     //  fetch all categories
     const getCategories = async () => {
@@ -25,6 +26,7 @@ export const TadasLanding = () => {
             credentials: 'include'
         });
         let jsonAllCategories = await allCategories.json();
+        if (jsonAllCategories.status === 302) navigate('/')
         if (jsonAllCategories) {
             setCategories(jsonAllCategories)
         }
@@ -39,6 +41,7 @@ export const TadasLanding = () => {
             credentials: 'include'
         });
         let jsonAllTodos = await allTodos.json();
+        if (jsonAllTodos.status === 302) navigate('/')
         if (jsonAllTodos) {
             setTodos(jsonAllTodos)
         }

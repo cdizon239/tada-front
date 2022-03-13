@@ -7,10 +7,12 @@ import { PlusCircleFill } from "react-bootstrap-icons";
 import { NewTodo } from "./NewTodo";
 import { ShowTodo } from "./ShowTodo";
 import Select from 'react-select';
+import {useNavigate} from 'react-router-dom';
 
 
 export const TodosLanding = () => {
 	const theme = useContext(ThemeContext)
+  const navigate = useNavigate()
 	const [todos, setTodos] = useState()
   const [categories, setCategories] = useState()
   const [showAddTodo, setShowAddTodo] = useState()
@@ -27,9 +29,11 @@ export const TodosLanding = () => {
       credentials: "include"
     });
     let jsonAllCategories = await allCategories.json();
+    if (jsonAllCategories.status === 302) navigate('/')
     if (jsonAllCategories) {
       setCategories(jsonAllCategories.map(category => category.category_name))
     }
+
   }
 
   const getTodos = async () => {
@@ -39,10 +43,11 @@ export const TodosLanding = () => {
       credentials: "include"
     });
     let jsonAllTodos = await allTodos.json();
+    console.log(jsonAllTodos);
+    if (jsonAllTodos.status === 302) navigate('/')
     if (jsonAllTodos) {
       let sortedTodos = jsonAllTodos.sort((a,b) => new Date(a.due_date) - new Date(b.due_date))
       selectedCategories ? setTodos(sortedTodos.filter(todo => selectedCategories.includes(todo.category?.category_name) && !todo.task_done)) : setTodos(sortedTodos.filter(todo => !todo.task_done))
-
 		}
   };
 

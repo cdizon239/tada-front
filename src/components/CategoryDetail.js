@@ -57,11 +57,11 @@ export const CategoryDetail = () => {
           credentials: 'include'
         });
         let jsonAllTodos = await allTodos.json();
+        if (jsonAllTodos.status === 302) navigate('/')
         if (jsonAllTodos) {
             let todosInCategory = jsonAllTodos.filter(todo => todo.category._id === params.categoryId)
             setTodos(todosInCategory)
         }
-        if (jsonAllTodos.status === 302) navigate('/')
     };
 
     // fetch category
@@ -88,6 +88,7 @@ export const CategoryDetail = () => {
             credentials: 'include'
         })
         let deletedCategory = await deleteCategory.json()
+        if (deletedCategory.status === 302) navigate('/')
         if (deletedCategory) {
             setShowDeleteModal(false)
             navigate('/tadas')

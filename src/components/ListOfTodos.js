@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Card, ListGroup, Form } from "react-bootstrap";
 import { ThemeContext } from "styled-components";
 import { PencilFill, TrashFill, Circle } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   cardStyles: {
@@ -41,6 +42,7 @@ const styles = {
 
 export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTodos }) => {
   const theme = useContext(ThemeContext);
+  const navigate = useNavigate()
 
   const deleteItem = async (todo) => {
     let itemDelete = await fetch(process.env.REACT_APP_BACKEND_URL + '/todo/' + todo._id, {
@@ -65,6 +67,8 @@ export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTo
         }
       )
     })
+    let itemDone = await doneItem.json()
+    if (itemDone.status === 302) navigate('/')
     getTodos()
   }
 
