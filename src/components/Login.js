@@ -5,6 +5,20 @@ import { useNavigate } from 'react-router-dom'
 
 const clientId = process.env.REACT_APP_GCLIENT_ID
 
+const styles = {
+    container: {
+        margin: '0 auto',
+        height: '90vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    title: {
+        textAlign: 'center'
+    }
+}
+
 export const Login = () => {
     const navigate = useNavigate()
 
@@ -34,18 +48,19 @@ export const Login = () => {
 
     return (
         <>
-            <div>Login</div>
-            <GoogleLogin
+            <div style={{...styles.container}}>
+                <h1>Ta-dah</h1>
+                <h4>Get your todos done today</h4>
+                <GoogleLogin
                 clientId={clientId}
-                buttonText="Login"
+                buttonText="Login with your Google account"
                 onSuccess={onSuccess}
                 // onFailure={onFailure}
                 cookiePolicy={process.env.REACT_APP_BACKEND_URL}
                 style={{ marginTop: '100px' }}
                 isSignedIn={true}
             />
-    
-
+            </div>
         </>
     )
 }
