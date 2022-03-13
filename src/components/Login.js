@@ -55,7 +55,8 @@ export const Login = () => {
                 clientId={clientId}
                 buttonText="Login with your Google account"
                 onSuccess={onSuccess}
-                cookiePolicy={process.env.REACT_APP_BACKEND_URL}
+                // cookiePolicy={process.env.REACT_APP_BACKEND_URL}
+                cookiePolicy={'single_host_origin'}
                 style={{ marginTop: '100px' }}
                 isSignedIn={true}
             />

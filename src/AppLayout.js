@@ -11,7 +11,7 @@ export const AppLayout = (props) => {
   const location = useLocation()
   return (
     <>
-        {location.pathname != '/' && <AppNav/>}
+        {location.pathname !== '/' && <AppNav/>}
         <StyledDiv>
         {props.children}
         </StyledDiv>
