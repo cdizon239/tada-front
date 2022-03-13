@@ -37,6 +37,7 @@ export const NewCategory = ({ setAddCategory, addCategory, runToRender }) => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     category_name: categoryName,
                     color: categoryColor

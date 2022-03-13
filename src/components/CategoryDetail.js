@@ -51,17 +51,26 @@ export const CategoryDetail = () => {
 
     //  fetch all todos
     const getTodos = async () => {
-        let allTodos = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo");
+        let allTodos = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo", {
+          method: 'GET',
+          headers: {'Content-Type': 'application/json'},
+          credentials: 'include'
+        });
         let jsonAllTodos = await allTodos.json();
         if (jsonAllTodos) {
             let todosInCategory = jsonAllTodos.filter(todo => todo.category._id === params.categoryId)
             setTodos(todosInCategory)
         }
+        if (jsonAllTodos.status === 302) navigate('/')
     };
 
     // fetch category
     const getCategory = async () => {
-        let category = await fetch(process.env.REACT_APP_BACKEND_URL + '/category/'+params.categoryId)
+        let category = await fetch(process.env.REACT_APP_BACKEND_URL + '/category/'+params.categoryId, {
+          method: 'GET',
+          headers: {'Content-Type': 'application/json'},
+          credentials: 'include'
+        })
         let categoryShow = await category.json();
         if (categoryShow) {
             console.log(categoryShow);
@@ -75,7 +84,8 @@ export const CategoryDetail = () => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include'
         })
         let deletedCategory = await deleteCategory.json()
         if (deletedCategory) {

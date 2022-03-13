@@ -35,6 +35,7 @@ export const EditCategory = ({ category, setCategory, showEditCategory, setShowE
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     category_name: categoryName
                 })

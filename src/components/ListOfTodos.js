@@ -47,7 +47,8 @@ export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTo
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'include'
     })
   }
 
@@ -57,6 +58,7 @@ export const ListOfTodos = ({ todo, listOfTodos, setShowEditTodo, setTodo, getTo
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify(
         {
           task_done: todo.task_done ? !todo.task_done : true

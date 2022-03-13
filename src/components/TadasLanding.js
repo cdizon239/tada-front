@@ -17,7 +17,13 @@ export const TadasLanding = () => {
 
     //  fetch all categories
     const getCategories = async () => {
-        let allCategories = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo/categories");
+        let allCategories = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo/categories", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            credentials: 'include'
+        });
         let jsonAllCategories = await allCategories.json();
         if (jsonAllCategories) {
             setCategories(jsonAllCategories)
@@ -25,7 +31,13 @@ export const TadasLanding = () => {
     }
     //  fetch all todos
     const getTodos = async () => {
-        let allTodos = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo");
+        let allTodos = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            credentials: 'include'
+        });
         let jsonAllTodos = await allTodos.json();
         if (jsonAllTodos) {
             setTodos(jsonAllTodos)

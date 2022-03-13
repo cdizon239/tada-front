@@ -29,6 +29,7 @@ export const ShowTodo = ({ todo, setTodo, showEditTodo, setShowEditTodo, categor
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify({
                 name: todoName,
                 description: todoDescription,

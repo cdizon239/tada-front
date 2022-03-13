@@ -1,10 +1,12 @@
 import React from 'react'
 import { GoogleLogin } from 'react-google-login';
 import { refreshTokenSetup } from '../utils/refreshToken'
+import { useNavigate } from 'react-router-dom'
 
 const clientId = process.env.REACT_APP_GCLIENT_ID
 
 export const Login = () => {
+    const navigate = useNavigate()
 
     const onSuccess = async (res) => {
         console.log(res.profileObj);
@@ -26,8 +28,10 @@ export const Login = () => {
             }),
             credentials: 'include'
         })
-
+        navigate('/todos')
     }
+
+
     return (
         <>
             <div>Login</div>
