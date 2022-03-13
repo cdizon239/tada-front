@@ -12,7 +12,6 @@ export const light = {
         deepChampagne: '#F2CC8F',
         tealBlue: '#4E8098',
         black:'#040303',
-        // grass: '#395B50'
         grass: '#629460'
     },
     text: {

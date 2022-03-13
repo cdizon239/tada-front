@@ -40,31 +40,6 @@ const styles = {
 
 export const ListOfGroups = ({ todos, categories }) => {
     const theme = useContext(ThemeContext);
-
-    //   const deleteItem = async (todo) => {
-    //     let itemDelete = await fetch(process.env.REACT_APP_BACKEND_URL + '/todo/' + todo._id, {
-    //       method: 'DELETE',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       }
-    //     })
-    //   }
-
-    //   const handleEditClick = (e, todo) => {
-    //     e.preventDefault()
-    //     setTodo(todo)
-    //     console.log(todo);
-    //     setShowEditTodo(true)
-    //     getTodos()
-
-    //   }
-
-    //   const handleDeleteClick = (e, todo) => {
-    //     e.preventDefault()
-    //     deleteItem(todo)
-    //     getTodos()
-    //   }
-
     return (
         <div style={{ ...styles.cardStyles }}>
             {categories?.map((category) => {

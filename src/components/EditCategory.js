@@ -52,10 +52,6 @@ export const EditCategory = ({ category, setCategory, showEditCategory, setShowE
         }
     }
 
-    useEffect(() => {
-        console.log(category);
-    }, [])
-
     return (
         <>
             <Modal show={showEditCategory} fullscreen={true}>

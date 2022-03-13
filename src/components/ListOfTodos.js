@@ -23,7 +23,6 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    // padding: "1em",
     width: '100%'
   },
   iconGroup: {

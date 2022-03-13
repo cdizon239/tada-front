@@ -28,7 +28,6 @@ export const AppNav = () => {
               <Nav.Link href="/todos">Todo</Nav.Link>
               <Nav.Link href="/tadas">Tada</Nav.Link>
               <Nav.Link onClick={() => handleLogout()}>Logout</Nav.Link>
-              {/* <Nav.Link href="/logout">Logout</Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
         </Container>
