@@ -37,12 +37,7 @@ export const Login = () => {
             }),
             credentials: 'include'
         })
-        let loginRes = await login.json()
-        console.log(loginRes);
-        if (loginRes.status === 201) {
-            navigate('/todos')
-
-        }
+        navigate('/todos')
     }
 
 
