@@ -24,7 +24,6 @@ export const TodosLanding = () => {
     let allCategories = await fetch(process.env.REACT_APP_BACKEND_URL + "/todo/categories", {
       method: "GET",
       headers: { 
-        'Access-Control-Allow-Origin':'*',
         "Content-Type": "application/json" },
       credentials: "include"
     });
@@ -60,9 +59,9 @@ export const TodosLanding = () => {
     getTodos()
   }, [selectedCategories])
 
-  useEffect(() => {
-    console.log(todos);
-  }, [todos])
+  // useEffect(() => {
+  //   console.log(todos);
+  // }, [todos])
 
 
   return (

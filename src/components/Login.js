@@ -49,22 +49,13 @@ export const Login = () => {
                 <h4>Get your todos done today</h4>
                 <GoogleLogin
                     clientId={clientId}
-                    render={renderProps => (
-                        <button onClick={renderProps.onClick} disabled={renderProps.disabled}>This is my custom Google button</button>
-                    )}
-                    buttonText="Login"
+                    // render={renderProps => (
+                    //     <button onClick={renderProps.onClick} disabled={renderProps.disabled}>This is my custom Google button</button>
+                    // )}
+                    buttonText="Login with your Google account"
                     onSuccess={onSuccess}
                     cookiePolicy={'single_host_origin'}
                 />
-                {/* <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Login with your Google account"
-                    onSuccess={onSuccess}
-                    // cookiePolicy={process.env.REACT_APP_BACKEND_URL}
-                    // cookiePolicy='single_host_origin'
-                    style={{ marginTop: '100px' }}
-                    isSignedIn={true}
-                /> */}
             </div>
         </>
     )
