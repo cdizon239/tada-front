@@ -37,6 +37,7 @@ export const Login = () => {
             }),
             credentials: 'include'
         })
+        console.log(await login.json());
         navigate('/todos')
     }
 

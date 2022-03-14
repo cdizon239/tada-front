@@ -7,7 +7,7 @@ export const AppNav = () => {
   const theme = useContext(ThemeContext)
   const navigate = useNavigate()
   const handleLogout = () => {
-    fetch(process.env.REACT_APP_BACKEND_URL+'sessions/logout', {
+    fetch(process.env.REACT_APP_BACKEND_URL+'/sessions/logout', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
