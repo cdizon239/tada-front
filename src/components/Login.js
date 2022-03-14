@@ -27,39 +27,48 @@ export const Login = () => {
         const id_token = res.getAuthResponse().id_token
         console.log(id_token);
         refreshTokenSetup(res)
-        await fetch(process.env.REACT_APP_BACKEND_URL+'/sessions/signIn', {
+        let login = await fetch(process.env.REACT_APP_BACKEND_URL + '/sessions/signIn', {
             method: 'POST',
             headers: {
-                'Access-Control-Allow-Origin':'*',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                givenName: res.profileObj.givenName,
-                email: res.profileObj.email,
-                googleId: res.profileObj.googleId,
-                imageUrl: res.profileObj.imageUrl,
                 id_token: id_token
             }),
             credentials: 'include'
         })
-        navigate('/todos')
+        let loginRes = await login.json()
+        console.log(loginRes);
+        if (loginRes.status === 201) {
+            navigate('/todos')
+
+        }
     }
 
 
     return (
         <>
-            <div style={{...styles.container}}>
+            <div style={{ ...styles.container }}>
                 <h1>Ta-dah</h1>
                 <h4>Get your todos done today</h4>
                 <GoogleLogin
-                clientId={clientId}
-                buttonText="Login with your Google account"
-                onSuccess={onSuccess}
-                cookiePolicy={process.env.REACT_APP_BACKEND_URL}
-                // cookiePolicy={'single_host_origin'}
-                style={{ marginTop: '100px' }}
-                isSignedIn={true}
-            />
+                    clientId={clientId}
+                    render={renderProps => (
+                        <button onClick={renderProps.onClick} disabled={renderProps.disabled}>This is my custom Google button</button>
+                    )}
+                    buttonText="Login"
+                    onSuccess={onSuccess}
+                    cookiePolicy={'single_host_origin'}
+                />
+                {/* <GoogleLogin
+                    clientId={clientId}
+                    buttonText="Login with your Google account"
+                    onSuccess={onSuccess}
+                    // cookiePolicy={process.env.REACT_APP_BACKEND_URL}
+                    // cookiePolicy='single_host_origin'
+                    style={{ marginTop: '100px' }}
+                    isSignedIn={true}
+                /> */}
             </div>
         </>
     )
